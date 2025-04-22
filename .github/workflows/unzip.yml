@@ -1,0 +1,23 @@
+name: Unzip File on Push
+
+on:
+  push:
+    branches:
+      - main  # Déclenche l'action sur un push sur la branche main
+
+jobs:
+  unzip:
+    runs-on: ubuntu-latest  # Exécute sur une machine virtuelle Ubuntu
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2  # Récupère ton code depuis GitHub
+
+    - name: Unzip file
+      run: |
+        mkdir -p extracted
+        unzip fichier.zip -d extracted  # Décompresse ton fichier ZIP dans un dossier "extracted"
+
+    - name: Ajouter les fichiers décompressés (optionnel)
+      run: |
+        mv extracted/* .  # Déplace les fichiers décompressés dans le répertoire principal
